@@ -1,0 +1,69 @@
+syntax = "proto3";
+enum RESULT
+{
+	SUCCESS = 0;
+	FAILED = 1;
+}
+
+enum CSID
+{
+    CSID_CONNECT_SUCCESSFUL = 0;
+    CSID_CONNECT_FAILED = 1;
+    CSID_AAC_DISPERSES_ICON_SEND = 2;
+    CSID_AAC_DISPERSES_ICON_TO_TEXT = 3;
+    
+    CSID_LOAD_ICON_REQ = 4;
+    CSID_LOAD_ICON_RES = 5;
+    
+    
+}
+
+message LoadIconReq{
+    CSID csid = 1;
+    repeated string iconLabel = 2;
+}
+
+message LoadIconRes{
+    CSID csid = 1;
+    repeated string iconLabel = 2;
+    repeated bytes imageData  = 3;
+}
+
+message AACDisperseIconSend
+{
+    CSID csid = 1;
+    repeated string iconLabel = 2;
+}
+
+
+message AACDisperseIconToText{
+    CSID csid = 1;
+    string text = 2;
+    AACTextEmotion textEmotion = 3;
+    AACPredictIconLabel predictIconLabel = 4;
+}
+
+message ConnectCheckRequest{
+    string msg = 1;
+}
+
+message ConnectCheckResponse{
+    bool connect = 1;//连接成功
+    RESULT result = 2;
+    string errormsg = 3;
+}
+
+message AACTextEmotion{
+    string currentEmotion = 1;
+    string GlobalEmotion = 2;
+}
+
+message AACPredictIconLabel{
+    string iconLabel = 1;
+}
+
+service Service {
+    rpc ConnectCheck(ConnectCheckRequest) returns (ConnectCheckResponse);
+    rpc ProcessAACMessage(AACDisperseIconSend) returns (AACDisperseIconToText);
+    rpc LoadIcon(LoadIconReq) returns (LoadIconRes);
+}
