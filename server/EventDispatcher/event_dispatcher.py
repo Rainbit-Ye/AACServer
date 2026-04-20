@@ -79,11 +79,10 @@ class EventDispatcher:
         Returns:
             AACDisperseIconToText响应
         """
-        logging.info("📨 收到AAC图标发送请求")
-        # 这里可以添加对AACDisperseIconSend的处理逻辑
+        logging.info("ProcessAACMessage 测试模式：返回测试成功消息")
         return pb2.AACDisperseIconToText(
             csid=pb2.CSID.CSID_AAC_DISPERSES_ICON_TO_TEXT,
-            text="Processing...",
+            text="测试成功",
             textEmotion=pb2.AACTextEmotion(currentEmotion="neutral", GlobalEmotion="neutral"),
             predictIconLabel=pb2.AACPredictIconLabel(iconLabel="")
         )

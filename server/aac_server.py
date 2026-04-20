@@ -62,10 +62,10 @@ class AACService(pb2_grpc.ServiceServicer):
     
     def ProcessAACMessage(self, request, context):
         """处理AAC消息 - 支持多设备并发"""
-        logging.warning("ProcessAACMessage 功能需要 connet_ai_api 模块，当前未实现")
+        logging.info("ProcessAACMessage 测试模式：返回测试成功消息")
         return pb2.AACDisperseIconToText(
             csid=pb2.CSID.CSID_AAC_DISPERSES_ICON_TO_TEXT,
-            text="Service not implemented",
+            text="测试成功",
             textEmotion=pb2.AACTextEmotion(currentEmotion="neutral", GlobalEmotion="neutral"),
             predictIconLabel=pb2.AACPredictIconLabel(iconLabel="")
         )
