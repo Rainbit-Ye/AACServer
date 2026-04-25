@@ -22,9 +22,9 @@ class LoadIconManager:
         初始化图标加载管理器
         
         Args:
-            dataset_path: 数据集路径，默认为 D:/2526/VRConnect/AACDataset/JPGDataset
+            dataset_path: 数据集路径，默认为 AACDataset/JPGDataset
         """
-        self.dataset_path = Path(dataset_path) if dataset_path else Path("D:/2526/VRConnect/AACDataset/JPGDataset")
+        self.dataset_path = Path(dataset_path) if dataset_path else Path(__file__).resolve().parent.parent.parent / "AACDataset" / "JPGDataset"
         self._path_cache = None
         self._build_path_cache()
         logging.info(f"LoadIconManager 初始化完成，数据集路径: {self.dataset_path}")
@@ -37,7 +37,7 @@ class LoadIconManager:
             logging.error(f"数据集路径不存在: {self.dataset_path}")
             return
         
-        for root, dirs, files in self.dataset_path.walk():
+        for root, dirs, files in os.walk(self.dataset_path):
             for file in files:
                 if file.lower().endswith(('.jpg', '.jpeg', '.png')):
                     filename = Path(file).stem

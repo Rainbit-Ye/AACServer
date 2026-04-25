@@ -61,14 +61,8 @@ class AACService(pb2_grpc.ServiceServicer):
         return self.dispatcher.dispatch(request.csid, request, context)
     
     def ProcessAACMessage(self, request, context):
-        """处理AAC消息 - 支持多设备并发"""
-        logging.info("ProcessAACMessage 测试模式：返回测试成功消息")
-        return pb2.AACDisperseIconToText(
-            csid=pb2.CSID.CSID_AAC_DISPERSES_ICON_TO_TEXT,
-            text="测试成功",
-            textEmotion=pb2.AACTextEmotion(currentEmotion="neutral", GlobalEmotion="neutral"),
-            predictIconLabel=pb2.AACPredictIconLabel(iconLabel="")
-        )
+        """处理AAC消息 - 使用事件分发器调用Pipeline推理"""
+        return self.dispatcher.dispatch(pb2.CSID.CSID_AAC_DISPERSES_ICON_SEND, request, context)
     
     def _get_client_ip(self, context):
         """从上下文获取客户端IP"""
