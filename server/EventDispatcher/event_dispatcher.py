@@ -29,6 +29,15 @@ class EventDispatcher:
 
         logging.info("事件分发器初始化完成")
 
+    @staticmethod
+    def _find_available_gpu():
+        """
+        返回 GPU device 字符串。
+        GPU 选择已在 start_server.py 启动时通过 CUDA_VISIBLE_DEVICES 完成，
+        PyTorch 只能看到一块 GPU，所以返回 'cuda' 即可。
+        """
+        return "cuda"
+
     def _get_pipeline(self):
         """延迟加载 AAC Emotion Pipeline（线程安全）"""
         if self._pipeline is not None:
@@ -45,14 +54,18 @@ class EventDispatcher:
 
             from aac_emotion_pipeline import AACEmotionPipeline
 
-            logging.info("正在加载 AAC Emotion Pipeline 模型...")
+            # 自动查找显存剩余最多的GPU
+            device = self._find_available_gpu()
+            logging.info(f"正在加载 AAC Emotion Pipeline 模型 (device={device})...")
 
             self._pipeline = AACEmotionPipeline(
                 aac_model_path="/home/user1/liuduanye/EmotionClassify/AAC2Text/checkpoints/aac_model",
                 aac_base_model_path="/home/user1/liuduanye/qwen/Qwen2_5-1_5B-Instruct",
                 emotion_model_path="/home/user1/liuduanye/EmotionClassify/output/cls_final",
                 emotion_base_model_path="/home/user1/liuduanye/EmotionClassify/Model/roberta-base",
-                device="cuda"
+                ontology_path="/home/user1/liuduanye/EmotionClassify/AAC2Text/data/processed/aac_full_ontology.json",
+                embedding_model="/home/user1/liuduanye/EmotionClassify/Model/all-MiniLM-L6-v2",
+                device=device
             )
 
             logging.info("AAC Emotion Pipeline 模型加载完成")
@@ -138,16 +151,19 @@ class EventDispatcher:
 
             # 构建预测图标标签: 从 icon_recommendations 中提取推荐的下一个图标
             # 按优先级: actions > entities > emotions > combinations
+            # 使用 icon_id 而非 label，因为 icon_id 才是客户端使用的短标签
             predicted_labels = []
             icon_recs = result.get('icon_recommendations', {})
 
             for category in ['actions', 'entities', 'emotions', 'combinations']:
                 for item in icon_recs.get(category, [])[:2]:  # 每类取前2个
-                    label = item.get('label', '')
-                    if label and label not in predicted_labels:
-                        predicted_labels.append(label)
+                    icon_id = item.get('icon_id', '')
+                    if not icon_id:
+                        continue
+                    if icon_id not in predicted_labels:
+                        predicted_labels.append(icon_id)
 
-            predict_icon_str = ','.join(predicted_labels[:5])  # 最多5个
+            predict_icons = predicted_labels[:5]  # 最多5个
 
             logging.info(
                 f"✅ [{client_ip}] Pipeline结果: "
@@ -155,7 +171,7 @@ class EventDispatcher:
                 f"current='{current_emotion}', "
                 f"theme='{theme_emotion}', "
                 f"next='{next_emotion}', "
-                f"predict_icons='{predict_icon_str}'"
+                f"predict_icons={predict_icons}"
             )
 
             return pb2.AACDisperseIconToText(
@@ -166,7 +182,7 @@ class EventDispatcher:
                     GlobalEmotion=theme_emotion
                 ),
                 predictIconLabel=pb2.AACPredictIconLabel(
-                    iconLabel=predict_icon_str
+                    iconLabel=predict_icons
                 )
             )
 

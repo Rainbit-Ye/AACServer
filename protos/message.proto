@@ -59,7 +59,7 @@ message AACTextEmotion{
 }
 
 message AACPredictIconLabel{
-    string iconLabel = 1;
+    repeated string iconLabel = 1;
 }
 
 service Service {
