@@ -60,7 +60,7 @@ class EventDispatcher:
 
             self._pipeline = AACEmotionPipeline(
                 aac_model_path="/home/user1/liuduanye/EmotionClassify/AAC2Text/checkpoints/aac_model",
-                aac_base_model_path="/home/user1/liuduanye/qwen/Qwen2_5-1_5B-Instruct",
+                aac_base_model_path="/home/user1/liuduanye/Meta-Llama-3-8B-Instruct",
                 emotion_model_path="/home/user1/liuduanye/EmotionClassify/output/cls_final",
                 emotion_base_model_path="/home/user1/liuduanye/EmotionClassify/Model/roberta-base",
                 ontology_path="/home/user1/liuduanye/EmotionClassify/AAC2Text/data/processed/aac_full_ontology.json",
@@ -179,7 +179,8 @@ class EventDispatcher:
                 text=text,
                 textEmotion=pb2.AACTextEmotion(
                     currentEmotion=current_emotion,
-                    GlobalEmotion=theme_emotion
+                    globalEmotion=theme_emotion,
+                    nextEmotion=next_emotion
                 ),
                 predictIconLabel=pb2.AACPredictIconLabel(
                     iconLabel=predict_icons
@@ -194,9 +195,10 @@ class EventDispatcher:
                 text=f"[Error] Pipeline inference failed: {str(e)}",
                 textEmotion=pb2.AACTextEmotion(
                     currentEmotion="neutral",
-                    GlobalEmotion="neutral"
+                    globalEmotion="neutral",
+                    nextEmotion="neutral"
                 ),
-                predictIconLabel=pb2.AACPredictIconLabel(iconLabel="")
+                predictIconLabel=pb2.AACPredictIconLabel(iconLabel=[])
             )
 
     def _get_client_ip(self, context):

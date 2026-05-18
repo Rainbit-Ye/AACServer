@@ -55,7 +55,8 @@ message ConnectCheckResponse{
 
 message AACTextEmotion{
     string currentEmotion = 1;
-    string GlobalEmotion = 2;
+    string globalEmotion = 2;
+    string nextEmotion = 3;
 }
 
 message AACPredictIconLabel{

@@ -24,17 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\"5\n\x0bLoadIconReq\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\"H\n\x0bLoadIconRes\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\x12\x11\n\timageData\x18\x03 \x03(\x0c\"=\n\x13\x41\x41\x43\x44isperseIconSend\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\"\x90\x01\n\x15\x41\x41\x43\x44isperseIconToText\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x0c\n\x04text\x18\x02 \x01(\t\x12$\n\x0btextEmotion\x18\x03 \x01(\x0b\x32\x0f.AACTextEmotion\x12.\n\x10predictIconLabel\x18\x04 \x01(\x0b\x32\x14.AACPredictIconLabel\"\"\n\x13\x43onnectCheckRequest\x12\x0b\n\x03msg\x18\x01 \x01(\t\"R\n\x14\x43onnectCheckResponse\x12\x0f\n\x07\x63onnect\x18\x01 \x01(\x08\x12\x17\n\x06result\x18\x02 \x01(\x0e\x32\x07.RESULT\x12\x10\n\x08\x65rrormsg\x18\x03 \x01(\t\"?\n\x0e\x41\x41\x43TextEmotion\x12\x16\n\x0e\x63urrentEmotion\x18\x01 \x01(\t\x12\x15\n\rGlobalEmotion\x18\x02 \x01(\t\"(\n\x13\x41\x41\x43PredictIconLabel\x12\x11\n\ticonLabel\x18\x01 \x03(\t*!\n\x06RESULT\x12\x0b\n\x07SUCCESS\x10\x00\x12\n\n\x06\x46\x41ILED\x10\x01*\xb3\x01\n\x04\x43SID\x12\x1b\n\x17\x43SID_CONNECT_SUCCESSFUL\x10\x00\x12\x17\n\x13\x43SID_CONNECT_FAILED\x10\x01\x12 \n\x1c\x43SID_AAC_DISPERSES_ICON_SEND\x10\x02\x12#\n\x1f\x43SID_AAC_DISPERSES_ICON_TO_TEXT\x10\x03\x12\x16\n\x12\x43SID_LOAD_ICON_REQ\x10\x04\x12\x16\n\x12\x43SID_LOAD_ICON_RES\x10\x05\x32\xb1\x01\n\x07Service\x12;\n\x0c\x43onnectCheck\x12\x14.ConnectCheckRequest\x1a\x15.ConnectCheckResponse\x12\x41\n\x11ProcessAACMessage\x12\x14.AACDisperseIconSend\x1a\x16.AACDisperseIconToText\x12&\n\x08LoadIcon\x12\x0c.LoadIconReq\x1a\x0c.LoadIconResb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\"5\n\x0bLoadIconReq\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\"H\n\x0bLoadIconRes\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\x12\x11\n\timageData\x18\x03 \x03(\x0c\"=\n\x13\x41\x41\x43\x44isperseIconSend\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x11\n\ticonLabel\x18\x02 \x03(\t\"\x90\x01\n\x15\x41\x41\x43\x44isperseIconToText\x12\x13\n\x04\x63sid\x18\x01 \x01(\x0e\x32\x05.CSID\x12\x0c\n\x04text\x18\x02 \x01(\t\x12$\n\x0btextEmotion\x18\x03 \x01(\x0b\x32\x0f.AACTextEmotion\x12.\n\x10predictIconLabel\x18\x04 \x01(\x0b\x32\x14.AACPredictIconLabel\"\"\n\x13\x43onnectCheckRequest\x12\x0b\n\x03msg\x18\x01 \x01(\t\"R\n\x14\x43onnectCheckResponse\x12\x0f\n\x07\x63onnect\x18\x01 \x01(\x08\x12\x17\n\x06result\x18\x02 \x01(\x0e\x32\x07.RESULT\x12\x10\n\x08\x65rrormsg\x18\x03 \x01(\t\"T\n\x0e\x41\x41\x43TextEmotion\x12\x16\n\x0e\x63urrentEmotion\x18\x01 \x01(\t\x12\x15\n\rglobalEmotion\x18\x02 \x01(\t\x12\x13\n\x0bnextEmotion\x18\x03 \x01(\t\"(\n\x13\x41\x41\x43PredictIconLabel\x12\x11\n\ticonLabel\x18\x01 \x03(\t*!\n\x06RESULT\x12\x0b\n\x07SUCCESS\x10\x00\x12\n\n\x06\x46\x41ILED\x10\x01*\xb3\x01\n\x04\x43SID\x12\x1b\n\x17\x43SID_CONNECT_SUCCESSFUL\x10\x00\x12\x17\n\x13\x43SID_CONNECT_FAILED\x10\x01\x12 \n\x1c\x43SID_AAC_DISPERSES_ICON_SEND\x10\x02\x12#\n\x1f\x43SID_AAC_DISPERSES_ICON_TO_TEXT\x10\x03\x12\x16\n\x12\x43SID_LOAD_ICON_REQ\x10\x04\x12\x16\n\x12\x43SID_LOAD_ICON_RES\x10\x05\x32\xb1\x01\n\x07Service\x12;\n\x0c\x43onnectCheck\x12\x14.ConnectCheckRequest\x1a\x15.ConnectCheckResponse\x12\x41\n\x11ProcessAACMessage\x12\x14.AACDisperseIconSend\x1a\x16.AACDisperseIconToText\x12&\n\x08LoadIcon\x12\x0c.LoadIconReq\x1a\x0c.LoadIconResb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_RESULT']._serialized_start=583
-  _globals['_RESULT']._serialized_end=616
-  _globals['_CSID']._serialized_start=619
-  _globals['_CSID']._serialized_end=798
+  _globals['_RESULT']._serialized_start=604
+  _globals['_RESULT']._serialized_end=637
+  _globals['_CSID']._serialized_start=640
+  _globals['_CSID']._serialized_end=819
   _globals['_LOADICONREQ']._serialized_start=17
   _globals['_LOADICONREQ']._serialized_end=70
   _globals['_LOADICONRES']._serialized_start=72
@@ -48,9 +48,9 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CONNECTCHECKRESPONSE']._serialized_start=392
   _globals['_CONNECTCHECKRESPONSE']._serialized_end=474
   _globals['_AACTEXTEMOTION']._serialized_start=476
-  _globals['_AACTEXTEMOTION']._serialized_end=539
-  _globals['_AACPREDICTICONLABEL']._serialized_start=541
-  _globals['_AACPREDICTICONLABEL']._serialized_end=581
-  _globals['_SERVICE']._serialized_start=801
-  _globals['_SERVICE']._serialized_end=978
+  _globals['_AACTEXTEMOTION']._serialized_end=560
+  _globals['_AACPREDICTICONLABEL']._serialized_start=562
+  _globals['_AACPREDICTICONLABEL']._serialized_end=602
+  _globals['_SERVICE']._serialized_start=822
+  _globals['_SERVICE']._serialized_end=999
 # @@protoc_insertion_point(module_scope)
